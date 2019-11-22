@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/page/utils/ToastUtil.dart';
 import 'package:flutter_app/widget/LabelIconButton.dart';
 
 class HomePage extends StatefulWidget {
@@ -158,7 +159,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   ///* 悬浮按钮点击
-  void _onPressed() {}
+  void _onPressed() {
+    setState(() {
+      ToastUtil.showLongToast("敬请期待！");
+    });
+  }
 
   /// *** 今日任务  *** ////
   List curDatas = new List();
