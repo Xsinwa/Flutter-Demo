@@ -83,8 +83,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   height: 50,
                   child: RaisedButton(
-                    onPressed: () => Navigator.pushNamed(context, "home_page",
-                        arguments: "123"),
+                    onPressed: (){
+                      _toHomePage();
+                    },
                     child: Text("登陆"),
                     color: Colors.blue,
                     textColor: Colors.white,
@@ -96,5 +97,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  /// 跳转至首页
+  void _toHomePage(){
+    Navigator.pushNamedAndRemoveUntil(context, "home_page", (route) => route == null);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/page/utils/ToastUtil.dart';
+import 'package:flutter_app/utils/ToastUtil.dart';
 import 'package:flutter_app/widget/LabelIconButton.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _pageController = new PageController(initialPage: 0);
+  DateTime _lastPressedTime;
   MaterialColor _colorToday = Colors.grey;
   MaterialColor _colorTomorrow = Colors.grey;
   MaterialColor _colorHistory = Colors.grey;
@@ -28,13 +29,23 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
 //      drawer: new Drawer(),
-      body: PageView.builder(
-        onPageChanged: _pageChanged,
-        controller: _pageController,
-        itemBuilder: (context, index) {
-          return _bodyChanged(index);
+      body: WillPopScope(
+        onWillPop: () async {
+          if(null == _lastPressedTime || DateTime.now().difference(_lastPressedTime) > Duration(seconds: 2)){
+            _lastPressedTime = DateTime.now();
+            ToastUtil.showLongToast("再按一次退出程序");
+            return false;
+          }
+          return true;
         },
-        itemCount: 4,
+        child: PageView.builder(
+          onPageChanged: _pageChanged,
+          controller: _pageController,
+          itemBuilder: (context, index) {
+            return _bodyChanged(index);
+          },
+          itemCount: 4,
+        ),
       ),
 //      bottomNavigationBar: BottomNavigationBar(
 //        items: <BottomNavigationBarItem>[
