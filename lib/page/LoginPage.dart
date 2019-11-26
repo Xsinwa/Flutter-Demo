@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/Index.dart';
+import 'package:flutter_app/store/Index.dart';
 import 'package:flutter_app/entity/ThemeConfigModel.dart';
 
 class LoginPage extends StatefulWidget {
