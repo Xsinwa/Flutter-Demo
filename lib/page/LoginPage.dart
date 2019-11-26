@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/Index.dart';
+import 'package:flutter_app/entity/ThemeConfigModel.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -49,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Checkbox(
                               value: remSwitchSelected,
-                              activeColor: Colors.blue,
+                              activeColor: Store.value<ThemeConfigModel>(context).theme,
                               onChanged: (value) {
                                 setState(() {
                                   remSwitchSelected = value;
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Checkbox(
                             value: autoSwitchSelected,
-                            activeColor: Colors.blue,
+                            activeColor: Store.value<ThemeConfigModel>(context).theme,
                             onChanged: (value) {
                               setState(() {
                                 autoSwitchSelected = value;
@@ -87,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                       _toHomePage();
                     },
                     child: Text("登陆"),
-                    color: Colors.blue,
+                    color: Store.value<ThemeConfigModel>(context).theme,
                     textColor: Colors.white,
                   ),
                 ),
@@ -101,6 +103,6 @@ class _LoginPageState extends State<LoginPage> {
 
   /// 跳转至首页
   void _toHomePage(){
-    Navigator.pushNamedAndRemoveUntil(context, "home_page", (route) => route == null);
+    Navigator.pushNamedAndRemoveUntil(context, "page_home", (route) => route == null);
   }
 }

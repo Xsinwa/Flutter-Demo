@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/entity/ThemeConfigModel.dart';
 import 'package:flutter_app/utils/ToastUtil.dart';
 import 'package:flutter_app/widget/LabelIconButton.dart';
+
+import '../Index.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,17 +15,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _pageController = new PageController(initialPage: 0);
+  int _index = 0;
   DateTime _lastPressedTime;
-  MaterialColor _colorToday = Colors.grey;
-  MaterialColor _colorTomorrow = Colors.grey;
-  MaterialColor _colorHistory = Colors.grey;
-  MaterialColor _colorMe = Colors.grey;
+  MaterialColor _colorToday, _colorTomorrow, _colorHistory, _colorMe;
 
   @override
   void initState() {
     super.initState();
-    _updateViewState(0);
     _retrieveData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateViewState(_index);
   }
 
   @override
@@ -127,11 +133,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pageChanged(int index) {
+    _index = index;
     _updateViewState(index);
   }
 
   /// * tab点击 * ///
   void _onItemTapped(int index) {
+    _index = index;
     _pageController.animateToPage(index,
         duration: const Duration(microseconds: 300), curve: Curves.easeInOut);
     _updateViewState(index);
@@ -142,28 +150,28 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       switch (index) {
         case 0:
-          _colorToday = Colors.deepPurple;
+          _colorToday = Store.value<ThemeConfigModel>(context).theme;
           _colorTomorrow = Colors.grey;
           _colorHistory = Colors.grey;
           _colorMe = Colors.grey;
           break;
         case 1:
           _colorToday = Colors.grey;
-          _colorTomorrow = Colors.deepPurple;
+          _colorTomorrow = Store.value<ThemeConfigModel>(context).theme;
           _colorHistory = Colors.grey;
           _colorMe = Colors.grey;
           break;
         case 2:
           _colorToday = Colors.grey;
           _colorTomorrow = Colors.grey;
-          _colorHistory = Colors.deepPurple;
+          _colorHistory = Store.value<ThemeConfigModel>(context).theme;
           _colorMe = Colors.grey;
           break;
         case 3:
           _colorToday = Colors.grey;
           _colorTomorrow = Colors.grey;
           _colorHistory = Colors.grey;
-          _colorMe = Colors.deepPurple;
+          _colorMe = Store.value<ThemeConfigModel>(context).theme;
           break;
       }
     });
@@ -276,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                     )),
                 FlatButton(
                     padding: const EdgeInsets.all(17.0),
-                    color: Colors.deepPurple,
+                    color: Store.value<ThemeConfigModel>(context).theme,
                     shape: CircleBorder(side: BorderSide.none),
                     onPressed: () {},
                     child: Text(
@@ -501,13 +509,18 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               constraints:
                   BoxConstraints.tightFor(width: double.infinity, height: 50),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text("设置"),
-                  ),
-                  Icon(Icons.chevron_right, color: Colors.black12,)
-                ],
+              child: GestureDetector(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text("设置"),
+                    ),
+                    Icon(Icons.chevron_right, color: Colors.black12,)
+                  ],
+                ),
+                onTap: (){
+                  Navigator.pushNamed(context, "page_setting");
+                },
               ),
             ),
           ),
