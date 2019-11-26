@@ -30,12 +30,17 @@ class _ThemePageState extends State<ThemePage> {
     Colors.grey,
     Colors.blueGrey,
   ];
+  //item列表
+  List<GestureDetector> _themeBox = new List();
 
-  List<GestureDetector> _themeBox = [];
+  @override
+  void initState() {
+    super.initState();
+    _initItem(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    _containers(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("应用皮肤"),
@@ -53,7 +58,7 @@ class _ThemePageState extends State<ThemePage> {
     );
   }
 
-  void _containers(BuildContext context){
+  void _initItem(BuildContext context){
     for(int i=0; i < colors.length; i++){
       _themeBox.add(GestureDetector(
         child: Container(
