@@ -1,35 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/entity/ColorsModel.dart';
 import 'package:flutter_app/store/Index.dart';
 import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/utils/SharedPreferencesUtil.dart';
 
 class ThemePage extends StatefulWidget{
   @override
   _ThemePageState createState() => _ThemePageState();
 }
 class _ThemePageState extends State<ThemePage> {
-
-  List<Color> colors = [
-    Colors.red,
-    Colors.pink,
-    Colors.deepPurple,
-    Colors.indigo,
-    Colors.purple,
-    Colors.deepOrange,
-    Colors.blue,
-    Colors.lightBlue,
-    Colors.cyan,
-    Colors.teal,
-    Colors.green,
-    Colors.lightGreen,
-    Colors.yellow,
-    Colors.amber,
-    Colors.orange,
-    Colors.lime,
-    Colors.brown,
-    Colors.grey,
-    Colors.blueGrey,
-  ];
   //item列表
   List<GestureDetector> _themeBox = new List();
 
@@ -59,13 +39,14 @@ class _ThemePageState extends State<ThemePage> {
   }
 
   void _initItem(BuildContext context){
-    for(int i=0; i < colors.length; i++){
+    for(int i=0; i < ColorsModel.colors.length; i++){
       _themeBox.add(GestureDetector(
         child: Container(
-          color: colors[i],
+          color: ColorsModel.colors[i],
         ),
         onTap: (){
-          Store.value<ThemeConfigModel>(context).setTheme(colors[i]);
+          Store.value<ThemeConfigModel>(context).setTheme(ColorsModel.colors[i]);
+          SharedPreferencesUtil.set("theme", i);
         },
       ));
     }

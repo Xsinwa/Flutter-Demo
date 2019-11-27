@@ -15,7 +15,7 @@ class MinePage extends StatelessWidget{
               children: <Widget>[
                 Container(
                   constraints: BoxConstraints.tightFor(
-                      width: double.infinity, height: 162),
+                      width: double.infinity, height: 180),
                   decoration: BoxDecoration(
                     //背景装饰
                     gradient: RadialGradient(
@@ -31,7 +31,7 @@ class MinePage extends StatelessWidget{
                   ),
                 ),
                 Positioned(
-                  top: 100,
+                  top: 80,
                   left: 15,
                   child: SizedBox(
                     width: 80,
@@ -43,7 +43,7 @@ class MinePage extends StatelessWidget{
                   ),
                 ),
                 Positioned(
-                  top: 120,
+                  top: 100,
                   left: 110,
                   child: Text(
                     "Xsinwa",
@@ -54,7 +54,7 @@ class MinePage extends StatelessWidget{
                   ),
                 ),
                 Positioned(
-                  top: 142,
+                  top: 122,
                   left: 110,
                   child: Text(
                     "今日事今日毕",

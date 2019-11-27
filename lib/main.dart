@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/entity/ColorsModel.dart';
 import 'package:flutter_app/store/Index.dart';
 import 'package:flutter_app/entity/ThemeConfigModel.dart';
 import 'package:flutter_app/page/LanguagePage.dart';
@@ -8,6 +9,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/page/SettingPage.dart';
 import 'package:flutter_app/page/ThemePage.dart';
+import 'package:flutter_app/utils/SharedPreferencesUtil.dart';
 
 
 void main() {
@@ -19,15 +21,17 @@ void main() {
   }
 }
 
-class MyApp extends StatefulWidget{
-  @override
-  MyAppState createState() => MyAppState();
-}
-
-class MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    /// 获取缓存主题
+    Future<dynamic> theme = SharedPreferencesUtil.get("theme", 0);
+    theme.then((dynamic index){
+      /// 将缓存值传给ThemeConfigModel
+      Store.value<ThemeConfigModel>(context).setTheme(ColorsModel.colors[index]);
+    });
+
     return Store.connect<ThemeConfigModel>(
       builder: (context, child, model){
         return MaterialApp(
