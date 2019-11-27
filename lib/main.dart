@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/entity/ColorsModel.dart';
+import 'package:flutter_app/page/CreateMissionPage.dart';
 import 'package:flutter_app/store/Index.dart';
 import 'package:flutter_app/entity/SharedValuesModel.dart';
 import 'package:flutter_app/page/LanguagePage.dart';
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
     return Store.connect<SharedValuesModel>(
       builder: (context, child, model){
         return MaterialApp(
+          //去掉debug标志
+          debugShowCheckedModeBanner: false,
           title: '任务闹铃',
           theme: ThemeData(
             // This is the theme of your application.
@@ -51,6 +54,7 @@ class MyApp extends StatelessWidget {
             "page_setting": (context) => SettingPage(),
             "page_language": (context) => LanguagePage(),
             "page_theme": (context) => ThemePage(),
+            "page_create_mission": (context) => CreateMissionPage(),
           },
 //      onGenerateRoute: (RouteSettings settings){
 //        return MaterialPageRoute(builder: (context){
