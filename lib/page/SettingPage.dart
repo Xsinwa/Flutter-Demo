@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/store/Index.dart';
-import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/entity/SharedValuesModel.dart';
+import 'package:flutter_app/utils/SharedPreferencesUtil.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -9,7 +10,6 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  bool _isRemind = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _SettingPageState extends State<SettingPage> {
                 children: <Widget>[
                   Icon(
                     Icons.alarm_on,
-                    color: Store.value<ThemeConfigModel>(context).theme,
+                    color: Store.value<SharedValuesModel>(context).theme,
                   ),
                   Expanded(
                     flex: 1,
@@ -39,10 +39,11 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                   ),
                   Switch(
-                    value: _isRemind,
+                    value: Store.value<SharedValuesModel>(context).openRemind,
                     onChanged: (value) {
                       setState(() {
-                        _isRemind = value;
+                        Store.value<SharedValuesModel>(context).setOpenRemind(value);
+                        SharedPreferencesUtil.set("openRemind", value);
                       });
                     },
                   ),
@@ -68,7 +69,7 @@ class _SettingPageState extends State<SettingPage> {
                   children: <Widget>[
                     Icon(
                       Icons.language,
-                      color: Store.value<ThemeConfigModel>(context).theme,
+                      color: Store.value<SharedValuesModel>(context).theme,
                     ),
                     Expanded(
                       child: Padding(
@@ -107,7 +108,7 @@ class _SettingPageState extends State<SettingPage> {
                   children: <Widget>[
                     Icon(
                       Icons.color_lens,
-                      color: Store.value<ThemeConfigModel>(context).theme,
+                      color: Store.value<SharedValuesModel>(context).theme,
                     ),
                     Expanded(
                       child: Padding(

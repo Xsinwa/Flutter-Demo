@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/entity/SharedValuesModel.dart';
 import 'package:flutter_app/page/MinePage.dart';
 import 'package:flutter_app/utils/ToastUtil.dart';
 import 'package:flutter_app/widget/LabelIconButton.dart';
@@ -151,28 +151,28 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       switch (index) {
         case 0:
-          _colorToday = Store.value<ThemeConfigModel>(context).theme;
+          _colorToday = Store.value<SharedValuesModel>(context).theme;
           _colorTomorrow = Colors.grey;
           _colorHistory = Colors.grey;
           _colorMe = Colors.grey;
           break;
         case 1:
           _colorToday = Colors.grey;
-          _colorTomorrow = Store.value<ThemeConfigModel>(context).theme;
+          _colorTomorrow = Store.value<SharedValuesModel>(context).theme;
           _colorHistory = Colors.grey;
           _colorMe = Colors.grey;
           break;
         case 2:
           _colorToday = Colors.grey;
           _colorTomorrow = Colors.grey;
-          _colorHistory = Store.value<ThemeConfigModel>(context).theme;
+          _colorHistory = Store.value<SharedValuesModel>(context).theme;
           _colorMe = Colors.grey;
           break;
         case 3:
           _colorToday = Colors.grey;
           _colorTomorrow = Colors.grey;
           _colorHistory = Colors.grey;
-          _colorMe = Store.value<ThemeConfigModel>(context).theme;
+          _colorMe = Store.value<SharedValuesModel>(context).theme;
           break;
       }
     });
@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                     )),
                 FlatButton(
                     padding: const EdgeInsets.all(17.0),
-                    color: Store.value<ThemeConfigModel>(context).theme,
+                    color: Store.value<SharedValuesModel>(context).theme,
                     shape: CircleBorder(side: BorderSide.none),
                     onPressed: () {},
                     child: Text(

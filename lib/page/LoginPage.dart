@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/store/Index.dart';
-import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/entity/SharedValuesModel.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Checkbox(
                               value: remSwitchSelected,
-                              activeColor: Store.value<ThemeConfigModel>(context).theme,
+                              activeColor: Store.value<SharedValuesModel>(context).theme,
                               onChanged: (value) {
                                 setState(() {
                                   remSwitchSelected = value;
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Checkbox(
                             value: autoSwitchSelected,
-                            activeColor: Store.value<ThemeConfigModel>(context).theme,
+                            activeColor: Store.value<SharedValuesModel>(context).theme,
                             onChanged: (value) {
                               setState(() {
                                 autoSwitchSelected = value;
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                       _toHomePage();
                     },
                     child: Text("登陆"),
-                    color: Store.value<ThemeConfigModel>(context).theme,
+                    color: Store.value<SharedValuesModel>(context).theme,
                     textColor: Colors.white,
                   ),
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/entity/ColorsModel.dart';
 import 'package:flutter_app/store/Index.dart';
-import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/entity/SharedValuesModel.dart';
 import 'package:flutter_app/page/LanguagePage.dart';
 import 'package:flutter_app/page/LoginPage.dart';
 import 'package:flutter_app/page/HomePage.dart';
@@ -14,6 +14,7 @@ import 'package:flutter_app/utils/SharedPreferencesUtil.dart';
 
 void main() {
   runApp(Store.init(child: MyApp()));
+  /// Android沉浸状态栏
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
         SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -25,14 +26,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    /// 获取缓存主题
-    Future<dynamic> theme = SharedPreferencesUtil.get("theme", 0);
-    theme.then((dynamic index){
-      /// 将缓存值传给ThemeConfigModel
-      Store.value<ThemeConfigModel>(context).setTheme(ColorsModel.colors[index]);
-    });
+    initSetting(context);
 
-    return Store.connect<ThemeConfigModel>(
+    return Store.connect<SharedValuesModel>(
       builder: (context, child, model){
         return MaterialApp(
           title: 'Flutter Demo',
@@ -66,5 +62,21 @@ class MyApp extends StatelessWidget {
         );
       }
     );
+  }
+
+  /// 初始化设置参数
+  void initSetting(BuildContext context){
+    /// 获取缓存主题
+    Future<dynamic> theme = SharedPreferencesUtil.get("theme", 0);
+    theme.then((dynamic index){
+      /// 将缓存值传给ThemeConfigModel
+      Store.value<SharedValuesModel>(context).setTheme(ColorsModel.colors[index]);
+    });
+    /// 获取设置缓存
+    Future<dynamic> openRemind = SharedPreferencesUtil.get("openRemind", false);
+    openRemind.then((dynamic isOpen){
+      /// 将缓存值传给ThemeConfigModel
+      Store.value<SharedValuesModel>(context).setOpenRemind(isOpen);
+    });
   }
 }

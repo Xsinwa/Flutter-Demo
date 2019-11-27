@@ -1,10 +1,10 @@
-import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/entity/SharedValuesModel.dart';
 import 'package:provide/provide.dart';
 
 class Store {
 
   static init({model, child, dispose = true}) {
-    final providers = Providers()..provide(Provider.value(ThemeConfigModel()));
+    final providers = Providers()..provide(Provider.value(SharedValuesModel()));
     return ProviderNode(
       child: child,
       providers: providers,

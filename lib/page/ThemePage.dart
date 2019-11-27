@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/entity/ColorsModel.dart';
 import 'package:flutter_app/store/Index.dart';
-import 'package:flutter_app/entity/ThemeConfigModel.dart';
+import 'package:flutter_app/entity/SharedValuesModel.dart';
 import 'package:flutter_app/utils/SharedPreferencesUtil.dart';
 
 class ThemePage extends StatefulWidget{
@@ -45,7 +45,7 @@ class _ThemePageState extends State<ThemePage> {
           color: ColorsModel.colors[i],
         ),
         onTap: (){
-          Store.value<ThemeConfigModel>(context).setTheme(ColorsModel.colors[i]);
+          Store.value<SharedValuesModel>(context).setTheme(ColorsModel.colors[i]);
           SharedPreferencesUtil.set("theme", i);
         },
       ));
