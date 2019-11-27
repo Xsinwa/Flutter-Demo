@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     return Store.connect<SharedValuesModel>(
       builder: (context, child, model){
         return MaterialApp(
-          title: 'Flutter Demo',
+          title: '任务闹铃',
           theme: ThemeData(
             // This is the theme of your application.
             //
