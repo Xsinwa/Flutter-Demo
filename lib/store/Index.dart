@@ -1,6 +1,7 @@
 import 'package:flutter_app/entity/SharedValuesModel.dart';
 import 'package:provide/provide.dart';
 
+///* 全局数据共享
 class Store {
 
   static init({model, child, dispose = true}) {
