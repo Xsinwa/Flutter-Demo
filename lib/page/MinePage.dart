@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MinePage extends StatelessWidget{
+class MinePage extends StatefulWidget{
+
+   @override
+  _MinePageState createState() {
+    return new _MinePageState();
+  }
+}
+
+class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -98,4 +107,7 @@ class MinePage extends StatelessWidget{
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
